@@ -27,7 +27,7 @@ const Home = () => {
 
     const filteredObjects = filter(listOfBooks, obj => obj.title.includes(text));
     setData(filteredObjects);
-    console.log(filteredObjects)
+    ///console.log(filteredObjects)
   };
   const renderItem = useCallback(({ item }:any) => {
     return <Renderitem item={item} />;
@@ -65,24 +65,22 @@ const Home = () => {
       <View style={styles.items}>
         <View className="  justify-center items-center">
 
-          {data.length > 0?
+        {books ? (
           (<FlatList
-            data={data}
+            data={data.length > 0?data:books}
             renderItem={renderItem}
             keyExtractor={(item: any) => item.title}
             numColumns={2}
             showsVerticalScrollIndicator={false}
       
-            />):
-            (<FlatList
-              data={books}
-              renderItem={renderItem}
-              keyExtractor={(item: any) => item.title}
-              numColumns={2}
-              showsVerticalScrollIndicator={false}
-        
-              />)
-            }
+            />)
+            ) : (
+              <View className="justify-center item-center h-full align-middle ">
+                <ActivityIndicator animating={true} color="blue" size="large" />
+              </View>
+    
+              )}
+            
 
         </View>
       </View>
